@@ -8,6 +8,7 @@ def getWindowSize():
         Size = input()
         try:
             Size = int(Size)
+            print(Size)
             if Size <= 0:
                 print("Value entered less than or equal to 0")
             else:
@@ -18,7 +19,7 @@ def getWindowSize():
 
 def WindowInit(windowName,Size):
     global playerWin
-    playerWin = GraphWin(windowName)
+    playerWin = GraphWin(windowName,Size,Size)
     playerWin.setCoords(0,0,Size,Size)
 
 def draw_text(tX,tY,string,color,win):
