@@ -1,4 +1,4 @@
-songLib = open("songLib.tsv ","r")
+songLib = open("songLib.tsv","r")
 songLib_data = []
 for line in songLib:
     number_songs = line.split("\t")
