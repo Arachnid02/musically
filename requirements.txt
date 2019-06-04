@@ -1,1 +1,1 @@
-youtube-dl==2019.5.20
+pytube==9.5.0
