@@ -1,3 +1,6 @@
+from pytube import YouTube
+import os
+
 def formatMusic(fileName):
     songLib = open(fileName,"r")
     songLib_data = []
@@ -25,19 +28,34 @@ def findDiff(lib,userInput):
         DiffHold = DiffHold + DiffHoldbuffer
     return DiffHold
 
-def determineRelevantAmountofSongs(threshold):
-    relevantSongsCount = 0
-    for diff in diffLib:
-        if diff < threshold:
-            relevantSongsCount += 1
-    return relevantSongsCount
+def determineRelevantSongs(lib,threshold):
+    newlib = []
+    for x in range(len(lib)):
+        if lib[x] < threshold:
+            newlib.append(1)
+        else:
+            newlib.append(0)
+    return newlib
 
-def findReleventSong(Lib):
-    for x in range(195 - determineRelevantAmountofSongs(10)):
-        Lib.remove(max(Lib))
-        return Lib
+def determineQue(songLib,revLib):
+    songQue = []
+    if len(songLib) == len(revLib):
+        for x in range(len(songLib)):
+            if revLib[x] == 1:
+                songQue.append(songLib[x])
+    else:
+        print("something is wrong")
+    return songQue
+    
+def getSongs(link,lib):
+    YouTube(link).streams.first().download("songs",lib[0])
+
+if not os.path.exists("songs"):  #creates dir "images" if dosn't exist
+    os.mkdir("songs")
 
 songLib = formatMusic("songLib.tsv")
 userInput = [5,3,4,7,8,7,8] #made up user input
 diffLib = findDiff(songLib,userInput)
-releventSongs = findReleventSong(diffLib)
+relevantSongList = determineRelevantSongs(diffLib,10)
+playableSongs = determineQue(songLib,relevantSongList)
+print(playableSongs) #playablesongs is what we que into our music player
