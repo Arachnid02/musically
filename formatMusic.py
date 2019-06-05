@@ -46,7 +46,7 @@ def determineQue(songLib,revLib):
     else:
         print("something is wrong")
     return songQue
-    
+
 def getSongs(link,lib):
     YouTube(link).streams.first().download("songs",lib[0])
 
@@ -56,6 +56,7 @@ if not os.path.exists("songs"):  #creates dir "images" if dosn't exist
 songLib = formatMusic("songLib.tsv")
 userInput = [5,3,4,7,8,7,8] #made up user input
 diffLib = findDiff(songLib,userInput)
-relevantSongList = determineRelevantSongs(diffLib,10)
+relevantSongList = determineRelevantSongs(diffLib,5)
 playableSongs = determineQue(songLib,relevantSongList)
-print(playableSongs) #playablesongs is what we que into our music player
+for x in range(len(playableSongs)):
+    print(playableSongs[x][0] + " " + playableSongs[x][2]) #playablesongs is what we que into our music player
