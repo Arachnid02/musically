@@ -1,5 +1,8 @@
 from pytube import YouTube
 import os
+import urllib.request
+import urllib
+from bs4 import BeautifulSoup
 
 def formatMusic(fileName):
     songLib = open(fileName,"r")
@@ -47,8 +50,16 @@ def determineQue(songLib,revLib):
         print("something is wrong")
     return songQue
 
-def getSongs(link,lib):
-    YouTube(link).streams.first().download("songs",lib[0])
+def getSongs(link,SongName):
+    YouTube(link).streams.first().download(output_path = 'songs',filename= SongName)
+
+def getSongLink(textToSearch):
+    query = urllib.parse.quote(textToSearch)
+    url = "https://www.youtube.com/results?search_query=" + query
+    response = urllib.request.urlopen(url)
+    html = response.read()
+    soup = BeautifulSoup(html, 'html.parser')
+    return 'https://www.youtube.com'+ soup.findAll(attrs={'class':'yt-uix-tile-link'})[0]['href']
 
 if not os.path.exists("songs"):  #creates dir "images" if dosn't exist
     os.mkdir("songs")
@@ -58,5 +69,9 @@ userInput = [5,3,4,7,8,7,8] #made up user input
 diffLib = findDiff(songLib,userInput)
 relevantSongList = determineRelevantSongs(diffLib,5)
 playableSongs = determineQue(songLib,relevantSongList)
+
 for x in range(len(playableSongs)):
-    print(playableSongs[x][0] + " " + playableSongs[x][2]) #playablesongs is what we que into our music player
+    try:
+        getSongs(getSongLink(playableSongs[x][0] + " " + playableSongs[x][2]),playableSongs[x][0]) #playablesongs is what we que into our music player
+    except urllib.error.HTTPError as error:
+        print(error)

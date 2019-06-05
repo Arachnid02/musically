@@ -1,5 +1,4 @@
 from RNgraphics import *
-import math
 
 def getWindowSize():
     print("Size of Window?")
@@ -8,13 +7,12 @@ def getWindowSize():
         Size = input()
         try:
             Size = int(Size)
-            print(Size)
             if Size <= 0:
                 print("Value entered less than or equal to 0")
             else:
                 break
         except ValueError:
-            print("You entered a string")
+            print("You entered a string, you apes")
     return Size
 
 def WindowInit(windowName,Size):
@@ -28,7 +26,7 @@ def draw_text(tX,tY,string,color,win):
     message.draw(win)
 def draw_ci(cX, cY, size, color, win,circle = None):
     #circle = boardState[incX][incY]
-    circle = Circle(Point(cX, cY), size)
+    circle = Circle(Point(cX, cY),size)
     circle.setFill(color)
     circle.draw(win)
 
