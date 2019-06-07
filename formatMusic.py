@@ -1,8 +1,11 @@
 from pytube import YouTube
 import os
+import moviepy.editor as mp
 import urllib.request
 import urllib
 from bs4 import BeautifulSoup
+import random
+import vlc
 
 def formatMusic(fileName):
     songLib = open(fileName,"r")
@@ -51,7 +54,7 @@ def determineQue(songLib,revLib):
     return songQue
 
 def getSongs(link,SongName):
-    YouTube(link).streams.first().download(output_path = 'songs',filename= SongName)
+    YouTube(link).streams.first().download(filename= SongName)
 
 def getSongLink(textToSearch):
     query = urllib.parse.quote(textToSearch)
@@ -60,9 +63,11 @@ def getSongLink(textToSearch):
     html = response.read()
     soup = BeautifulSoup(html, 'html.parser')
     return 'https://www.youtube.com'+ soup.findAll(attrs={'class':'yt-uix-tile-link'})[0]['href']
+def convert(input,outputName):
+    clip = mp.VideoFileClip(input)
+    clip.audio.write_audiofile(outputName)
 
-if not os.path.exists("songs"):  #creates dir "images" if dosn't exist
-    os.mkdir("songs")
+
 
 songLib = formatMusic("songLib.tsv")
 userInput = [5,3,4,7,8,7,8] #made up user input
@@ -70,8 +75,12 @@ diffLib = findDiff(songLib,userInput)
 relevantSongList = determineRelevantSongs(diffLib,5)
 playableSongs = determineQue(songLib,relevantSongList)
 
-for x in range(len(playableSongs)):
+x = random.randint(0, len(playableSongs) - 1)
+print(x)
+while True:
     try:
-        getSongs(getSongLink(playableSongs[x][0] + " " + playableSongs[x][2]),playableSongs[x][0]) #playablesongs is what we que into our music player
+        getSongs(getSongLink(playableSongs[x][0] + " " + playableSongs[x][2]),"song") #playablesongs is what we que into our music player
+        convert("song.mp4",playableSongs[x][0] + ".mp3")
+        break
     except urllib.error.HTTPError as error:
         print(error)
