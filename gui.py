@@ -79,8 +79,6 @@ askTitle.draw(qOneWin)
 inTitle = Entry(Point(150, 645), 20)
 inTitle.setTextColor("black")
 inTitle.draw(qOneWin)
-uTitle = inTitle.getText()
-print("User title =", uTitle)
 
 askTempo = Text(Point(253, 600), "2. How fast or slow is this song? Rate 1-10, 10 meaning it's super fast!")
 askTempo.setSize(16)
@@ -109,7 +107,10 @@ while pg2 == False:
             
     except ValueError:
         print("Click error")
-        
+
+uTitle = inTitle.getText()
+print("User title = ", uTitle)
+
 qOneWin.close()
 
 qTwoWin = GraphWin("Musically Page 2", 700,700)
