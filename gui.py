@@ -1,12 +1,32 @@
 #musically.py- Kaylee N
 from graphics import *
 
+#if we make rX and rY == 100, we can easily compute it by multipying by a flaot (ex. 100 * 1.1 = 110)
+
+def nextButton(rX, rY, text, txSize, rCol, txCol, style, win):
+    nextRec = Rectangle(Point(rX * 6.1, rY * 0.1), Point(rX * 6.9, rY * 0.6))
+    nextRec.setFill(rCol)
+    nextRec.draw(win)
+
+    nextTex = Text(Point(rX * 6.5, rY * 0.35), text)
+    nextTex.setSize(txSize)
+    nextTex.setStyle(style)
+    nextTex.setTextColor(txCol)
+    nextTex.draw(win)    
+
 musicWin = GraphWin("Musically", 700, 700)
 musicWin.setCoords(0,0,700,700)
 
 pg1 = False
 pg2 = False
-    
+
+rX = 100
+rY = 100
+text = "next page"
+txSize = 15
+rCol = color_rgb(0, 255, 0)
+txCol = "black"
+style = "bold"
 
 #Text
 intro = Text(Point(350, 570), "Welcome to our Music Program!")
@@ -25,17 +45,9 @@ direct.draw(musicWin)
 mnoteImage = Image(Point(350,210), "music notes.png")
 mnoteImage.draw(musicWin)
 
-#next button
-nextRec = Rectangle(Point(610,10),Point(690,60))
-nextRec.setFill(color_rgb(0,255,0))
-nextRec.draw(musicWin)
-#next
-nextTex = Text(Point(650, 35), "next page")
-nextTex.setSize(15)
-nextTex.setStyle("bold")
-nextTex.setTextColor("black")
-nextTex.draw(musicWin)
 
+#Next Page Button
+nextButton(rX, rY, text, txSize, rCol, txCol, style, musicWin)
 
 while pg1 == False:
     try:
@@ -51,46 +63,39 @@ while pg1 == False:
         print("Click error")
 
 musicWin.close()
-       
+
+#Next Page Questions
 qOneWin = GraphWin("Musically Page 1", 700,700)
 qOneWin.setCoords(0,0,700,700)
 
-#Next Page Questions
-quesOne = Text(Point(140, 670), "1. What's the title of the song?")
-quesOne.setSize(18)
-quesOne.setStyle("bold")
-quesOne.setTextColor("black")
-quesOne.draw(qOneWin)
+#Ask User For Name of Their Song
+askTitle = Text(Point(140, 670), "1. What's the title of the song?")
+askTitle.setSize(18)
+askTitle.setStyle("bold")
+askTitle.setTextColor("black")
+askTitle.draw(qOneWin)
 
+#Get User Song Title
 inTitle = Entry(Point(150, 645), 20)
 inTitle.setTextColor("black")
 inTitle.draw(qOneWin)
-
-quesTwo = Text(Point(253, 600), "2. How fast or slow is this song? Rate 1-10, 10 meaning it's super fast!")
-quesTwo.setSize(16)
-quesTwo.setStyle("bold")
-quesTwo.setTextColor("black")
-quesTwo.draw(qOneWin)
-
-quesThree = Text(Point(360, 550), "3.How much this song make you want to dance? Rate 1-10, 10 meaning your body starts moving as soon as you hear it.")
-quesThree.setSize(13)
-quesThree.setStyle("bold")
-quesThree.setTextColor("black")
-quesThree.draw(qOneWin)
-
-#next button
-nextRec = Rectangle(Point(610,10),Point(690,60))
-nextRec.setFill(color_rgb(0,255,0))
-nextRec.draw(qOneWin)
-
-nextTex = Text(Point(650, 35), "next page")
-nextTex.setSize(15)
-nextTex.setStyle("bold")
-nextTex.setTextColor("black")
-nextTex.draw(qOneWin)
-
 uTitle = inTitle.getText()
-print("User title = ", uTitle)
+print("User title =", uTitle)
+
+askTempo = Text(Point(253, 600), "2. How fast or slow is this song? Rate 1-10, 10 meaning it's super fast!")
+askTempo.setSize(16)
+askTempo.setStyle("bold")
+askTempo.setTextColor("black")
+askTempo.draw(qOneWin)
+
+askDdr = Text(Point(360, 550), "3.How much this song make you want to dance? Rate 1-10, 10 meaning your body starts moving as soon as you hear it.")
+askDdr.setSize(13)
+askDdr.setStyle("bold")
+askDdr.setTextColor("black")
+askDdr.draw(qOneWin)
+
+#Next Page Button
+nextButton(rX, rY, text, txSize, rCol, txCol, style, qOneWin)
 
 while pg2 == False:
     try:
