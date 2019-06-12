@@ -1,11 +1,11 @@
-from pytube import YouTube
-import os
-import moviepy.editor as mp
-import urllib.request
-import urllib
-from bs4 import BeautifulSoup
+#from pytube import YouTube
+#import os
+#import moviepy.editor as mp
+#import urllib.request
+#import urllib
+#from bs4 import BeautifulSoup
 import random
-import vlc
+#import vlc
 
 def formatMusic(fileName):
     songLib = open(fileName,"r")
@@ -53,6 +53,7 @@ def determineQue(songLib,revLib):
         print("something is wrong")
     return songQue
 
+"""
 def getSongs(link,SongName):
     YouTube(link).streams.first().download(filename= SongName)
 
@@ -67,16 +68,19 @@ def convert(input,outputName):
     clip = mp.VideoFileClip(input)
     clip.audio.write_audiofile(outputName)
 
-
+"""
 
 songLib = formatMusic("songLib.tsv")
 userInput = [5,3,4,7,8,7,8] #made up user input
 diffLib = findDiff(songLib,userInput)
 relevantSongList = determineRelevantSongs(diffLib,5)
 playableSongs = determineQue(songLib,relevantSongList)
+print(playableSongs)
 
+"""
 x = random.randint(0, len(playableSongs) - 1)
 print(x)
+
 while True:
     try:
         getSongs(getSongLink(playableSongs[x][0] + " " + playableSongs[x][2]),"song") #playablesongs is what we que into our music player
@@ -84,3 +88,4 @@ while True:
         break
     except urllib.error.HTTPError as error:
         print(error)
+"""
