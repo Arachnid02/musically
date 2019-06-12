@@ -71,7 +71,7 @@ def convert(input,outputName):
 """
 
 songLib = formatMusic("songLib.tsv")
-userInput = [5,3,4,7,8,7,8] #made up user input
+userInput = [6,3,4,7,5,7,44] #made up user input
 diffLib = findDiff(songLib,userInput)
 relevantSongList = determineRelevantSongs(diffLib,5)
 playableSongs = determineQue(songLib,relevantSongList)
