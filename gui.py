@@ -1,8 +1,28 @@
 #musically.py- Kaylee N
 from graphics import *
 
-#if we make rX and rY == 100, we can easily compute it by multipying by a flaot (ex. 100 * 1.1 = 110)
+pg1 = False
+pg2 = False
+rX = 100
+rY = 100
+text = "next page"
+txSize = 15
+rCol = color_rgb(0, 255, 0)
+txCol = "black"
+style = "bold"
+askTitle = "1. What's the title of the song?"
+askTempo = "2. How fast or slow is this song? Rate 1-10, 10 meaning it's super fast!"
+askDdr = """3.How much this song make you want to dance? Rate 1-10, 10 meaning
+              your body starts moving as soon as you hear it."""
 
+def questions(tX, tY, text, size, style, color, win):
+    question = Text(Point(tX, tY), text)
+    question.setSize(size)
+    question.setStyle(style)
+    question.setTextColor(color)
+    question.draw(win)
+
+#if we make rX and rY == 100, we can easily compute it by multipying by a flaot (ex. 100 * 1.1 = 110)
 def nextButton(rX, rY, text, txSize, rCol, txCol, style, win):
     nextRec = Rectangle(Point(rX * 6.1, rY * 0.1), Point(rX * 6.9, rY * 0.6))
     nextRec.setFill(rCol)
@@ -16,17 +36,6 @@ def nextButton(rX, rY, text, txSize, rCol, txCol, style, win):
 
 musicWin = GraphWin("Musically", 700, 700)
 musicWin.setCoords(0,0,700,700)
-
-pg1 = False
-pg2 = False
-
-rX = 100
-rY = 100
-text = "next page"
-txSize = 15
-rCol = color_rgb(0, 255, 0)
-txCol = "black"
-style = "bold"
 
 #Text
 intro = Text(Point(350, 570), "Welcome to our Music Program!")
@@ -69,28 +78,18 @@ qOneWin = GraphWin("Musically Page 1", 700,700)
 qOneWin.setCoords(0,0,700,700)
 
 #Ask User For Name of Their Song
-askTitle = Text(Point(140, 670), "1. What's the title of the song?")
-askTitle.setSize(18)
-askTitle.setStyle("bold")
-askTitle.setTextColor("black")
-askTitle.draw(qOneWin)
+questions(rX * 1.4, rY * 6.7, askTitle, 18, style, txCol, qOneWin)
 
 #Get User Song Title
 inTitle = Entry(Point(150, 645), 20)
 inTitle.setTextColor("black")
 inTitle.draw(qOneWin)
 
-askTempo = Text(Point(253, 600), "2. How fast or slow is this song? Rate 1-10, 10 meaning it's super fast!")
-askTempo.setSize(16)
-askTempo.setStyle("bold")
-askTempo.setTextColor("black")
-askTempo.draw(qOneWin)
+#Ask User For Tempo
+questions(rX * 3.08, rY * 6, askTempo, 18, style, txCol, qOneWin)
 
-askDdr = Text(Point(360, 550), "3.How much this song make you want to dance? Rate 1-10, 10 meaning your body starts moving as soon as you hear it.")
-askDdr.setSize(13)
-askDdr.setStyle("bold")
-askDdr.setTextColor("black")
-askDdr.draw(qOneWin)
+#Ask User For DDR
+questions(rX * 3.13, rY * 5.5, askDdr, 18, style, txCol, qOneWin)
 
 #Next Page Button
 nextButton(rX, rY, text, txSize, rCol, txCol, style, qOneWin)
