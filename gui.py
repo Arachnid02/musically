@@ -88,8 +88,18 @@ inTitle.draw(qOneWin)
 #Ask User For Tempo
 questions(rX * 3.08, rY * 6, askTempo, 18, style, txCol, qOneWin)
 
+#Get User Tempo
+inTempo = Entry(Point(150, 575), 2)
+inTempo.setTextColor("black")
+inTempo.draw(qOneWin)
+
 #Ask User For DDR
-questions(rX * 3.13, rY * 5.5, askDdr, 18, style, txCol, qOneWin)
+questions(rX * 3.13, rY * 5.3, askDdr, 18, style, txCol, qOneWin)
+
+#Get User DDR
+inDdr = Entry(Point(150, 490), 2)
+inDdr.setTextColor("black")
+inDdr.draw(qOneWin)
 
 #Next Page Button
 nextButton(rX, rY, text, txSize, rCol, txCol, style, qOneWin)
@@ -109,6 +119,10 @@ while pg2 == False:
 
 uTitle = inTitle.getText()
 print("User title = ", uTitle)
+uTempo = inTempo.getText()
+print("User tempo = ", uTempo)
+uDdr = inDdr.getText()
+print("User DDR = ", uDdr)
 
 qOneWin.close()
 
