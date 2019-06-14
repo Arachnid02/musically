@@ -12,14 +12,21 @@ def nextButton(rX, rY, text, txSize, rCol, txCol, style, win):
     nextTex.setSize(txSize)
     nextTex.setStyle(style)
     nextTex.setTextColor(txCol)
-    nextTex.draw(win)    
+    nextTex.draw(win)
 
-musicWin = GraphWin("Musically", 700, 700)
-musicWin.setCoords(0,0,700,700)
+def questions(tX, tY, text, size, style, color, win):
+    question = Text(Point(tX, tY), text)
+    question.setSize(size)
+    question.setStyle(style)
+    question.setTextColor(color)
+    question.draw(win)
+    
+
 
 pg1 = False
 pg2 = False
 
+#variables
 rX = 100
 rY = 100
 text = "next page"
@@ -27,6 +34,21 @@ txSize = 15
 rCol = color_rgb(0, 255, 0)
 txCol = "black"
 style = "bold"
+
+#question variables
+askTitle = "1. What's the title of the song?"
+askTempo = "2. How fast or slow is this song? Rate 1-10, 10 meaning it's super fast!"
+askDdr = "3.How much this song make you want to dance? Rate 1-10, 10 meaning your body starts moving as soon as you hear it."
+askRhy = "4.How good does the rhythm flow with the rest of the song? Rate 1-10, 10 meaning it flows so well."
+askMel = "5.How well does the melody flow? Rate 1-10, 10 meaning it goes along with the song well."
+askLyr = "6.How good are the lyrics? Rate 1-10, 10 meaning those lyrics hit you on a whole other level."
+askVoc = "7.Rate the vocals in this song from 1-10, 10 meaning the vocals were beautiful."
+askIns = "8.What's the quality of the instrumental skill? Rate 1-10."
+
+
+
+musicWin = GraphWin("Musically", 700, 700)
+musicWin.setCoords(0,0,700,700)
 
 #Text
 intro = Text(Point(350, 570), "Welcome to our Music Program!")
@@ -68,29 +90,85 @@ musicWin.close()
 qOneWin = GraphWin("Musically Page 1", 700,700)
 qOneWin.setCoords(0,0,700,700)
 
-#Ask User For Name of Their Song
-askTitle = Text(Point(140, 670), "1. What's the title of the song?")
-askTitle.setSize(18)
-askTitle.setStyle("bold")
-askTitle.setTextColor("black")
-askTitle.draw(qOneWin)
+#1.Ask User For Name of Their Song
+questions(rX * 1.4, rY * 6.7, askTitle, 18, style, txCol, qOneWin)
 
 #Get User Song Title
-inTitle = Entry(Point(150, 645), 20)
+inTitle = Entry(Point(150, 640), 20)
 inTitle.setTextColor("black")
 inTitle.draw(qOneWin)
 
-askTempo = Text(Point(253, 600), "2. How fast or slow is this song? Rate 1-10, 10 meaning it's super fast!")
-askTempo.setSize(16)
-askTempo.setStyle("bold")
-askTempo.setTextColor("black")
-askTempo.draw(qOneWin)
+#2.Ask User For Tempo
+questions(rX * 3.09, rY * 6.14, askTempo, 17, style, txCol, qOneWin)
 
-askDdr = Text(Point(360, 550), "3.How much this song make you want to dance? Rate 1-10, 10 meaning your body starts moving as soon as you hear it.")
-askDdr.setSize(13)
-askDdr.setStyle("bold")
-askDdr.setTextColor("black")
-askDdr.draw(qOneWin)
+#Get User Song Tempo
+inTempo = Entry(Point(150, 580), 20)
+inTempo.setTextColor("black")
+inTempo.draw(qOneWin)
+
+#3.Ask User For DDR
+questions(rX * 3.33, rY * 5.4, askDdr, 12, style, txCol, qOneWin)
+
+#Get User Song DDR
+inDdr = Entry(Point(150, 500), 20)
+inDdr.setTextColor("black")
+inDdr.draw(qOneWin)
+
+#4.Ask User For the Rate of the Rhythm to Their Song
+questions(rX * 3.5, rY * 4.6, askRhy, 15, style, txCol, qOneWin)
+
+#Get User Song Rhythm
+inRhy = Entry(Point(150, 420), 20)
+inRhy.setTextColor("black")
+inRhy.draw(qOneWin)
+
+#5.Ask User For How Good the Melody is in Their Song
+questions(rX * 3.3, rY * 3.8, askMel, 16, style, txCol, qOneWin)
+
+#Get User Song Melody
+inMel = Entry(Point(150, 340), 20)
+inMel.setTextColor("black")
+inMel.draw(qOneWin)
+
+#6.Ask User For the Quality of the Lyrics to Their Song
+questions(rX * 3.4, rY * 3, askLyr, 16, style, txCol, qOneWin)
+
+#Get User Song Lyrics
+inLyr = Entry(Point(150, 260), 20)
+inLyr.setTextColor("black")
+inLyr.draw(qOneWin)
+
+#7.Ask User For the Vocals of Their Song
+questions(rX * 3.5, rY * 2.2, askVoc, 18, style, txCol, qOneWin)
+
+#Get User Song Vocals
+inVoc = Entry(Point(150, 180), 20)
+inVoc.setTextColor("black")
+inVoc.draw(qOneWin)
+
+#8.Ask User For the Instrumental Skill of Their Song
+questions(rX * 2.5, rY * 1.4, askIns, 18, style, txCol, qOneWin)
+
+#Get User Song Melody
+inIns = Entry(Point(150, 100), 20)
+inIns.setTextColor("black")
+inIns.draw(qOneWin)
+
+#melody image
+melImage = Image(Point(350,340), "melody.png")
+melImage.draw(qOneWin)
+
+#dance image
+ddrImage = Image(Point(480,480), "dance.png")
+ddrImage.draw(qOneWin)
+
+#instruments image
+insImage = Image(Point(560,120), "instruments.png")
+insImage.draw(qOneWin)
+
+#music note 2 image
+mntImage = Image(Point(640,640), "MUSICNOTE.png")
+mntImage.draw(qOneWin)
 
 #Next Page Button
 nextButton(rX, rY, text, txSize, rCol, txCol, style, qOneWin)
@@ -111,9 +189,25 @@ while pg2 == False:
 uTitle = inTitle.getText()
 print("User title = ", uTitle)
 
-qOneWin.close()
+uTempo = inTempo.getText()
+print("User tempo =", uTempo)
 
-qTwoWin = GraphWin("Musically Page 2", 700,700)
-qTwoWin.setCoords(0,0,700,700)
-    
-    
+uDdr = inDdr.getText()
+print("User ddr = ", uDdr)
+
+uRhy = inRhy.getText()
+print("User rhythm = ", uRhy)
+
+uMel = inMel.getText()
+print("User melody = ", uMel)
+
+uLyr = inLyr.getText()
+print("User lyrics = ", uLyr)
+
+uVoc = inVoc.getText()
+print("User vocals = ", uVoc)
+
+uIns = inIns.getText()
+print("User ins skill = ", uIns)
+
+qOneWin.close() 
