@@ -1,8 +1,28 @@
 #musically.py- Kaylee N
 from graphics import *
 
-#if we make rX and rY == 100, we can easily compute it by multipying by a flaot (ex. 100 * 1.1 = 110)
+pg1 = False
+pg2 = False
+rX = 100
+rY = 100
+text = "next page"
+txSize = 15
+rCol = color_rgb(0, 255, 0)
+txCol = "black"
+style = "bold"
+askTitle = "1. What's the title of the song?"
+askTempo = "2. How fast or slow is this song? Rate 1-10, 10 meaning it's super fast!"
+askDdr = """3.How much this song make you want to dance? Rate 1-10, 10 meaning
+              your body starts moving as soon as you hear it."""
 
+def questions(tX, tY, text, size, style, color, win):
+    question = Text(Point(tX, tY), text)
+    question.setSize(size)
+    question.setStyle(style)
+    question.setTextColor(color)
+    question.draw(win)
+
+#if we make rX and rY == 100, we can easily compute it by multipying by a flaot (ex. 100 * 1.1 = 110)
 def nextButton(rX, rY, text, txSize, rCol, txCol, style, win):
     nextRec = Rectangle(Point(rX * 6.1, rY * 0.1), Point(rX * 6.9, rY * 0.6))
     nextRec.setFill(rCol)
@@ -21,8 +41,6 @@ def questions(tX, tY, text, size, style, color, win):
     question.setTextColor(color)
     question.draw(win)
     
-
-
 pg1 = False
 pg2 = False
 
@@ -99,7 +117,7 @@ inTitle.setTextColor("black")
 inTitle.draw(qOneWin)
 
 #2.Ask User For Tempo
-questions(rX * 3.09, rY * 6.14, askTempo, 17, style, txCol, qOneWin)
+questions(rX * 2.9, rY * 6.14, askTempo, 17, style, txCol, qOneWin)
 
 #Get User Song Tempo
 inTempo = Entry(Point(150, 580), 20)
@@ -188,6 +206,10 @@ while pg2 == False:
 
 uTitle = inTitle.getText()
 print("User title = ", uTitle)
+uTempo = inTempo.getText()
+print("User tempo = ", uTempo)
+uDdr = inDdr.getText()
+print("User DDR = ", uDdr)
 
 uTempo = inTempo.getText()
 print("User tempo =", uTempo)
