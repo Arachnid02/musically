@@ -1,11 +1,12 @@
-#from pytube import YouTube
-#import os
-#import moviepy.editor as mp
-#import urllib.request
-#import urllib
-#from bs4 import BeautifulSoup
+from pytube import YouTube
+import os
+import moviepy.editor as mp
+import urllib.request
+import urllib
+from bs4 import BeautifulSoup
 import random
-#import vlc
+import pyaudio
+from pygame import mixer
 
 def formatMusic(fileName):
     songLib = open(fileName,"r")
@@ -53,39 +54,37 @@ def determineQue(songLib,revLib):
         print("something is wrong")
     return songQue
 
-"""
 def getSongs(link,SongName):
     YouTube(link).streams.first().download(filename= SongName)
 
 def getSongLink(textToSearch):
+    print("Attempting to download")
     query = urllib.parse.quote(textToSearch)
     url = "https://www.youtube.com/results?search_query=" + query
     response = urllib.request.urlopen(url)
     html = response.read()
     soup = BeautifulSoup(html, 'html.parser')
     return 'https://www.youtube.com'+ soup.findAll(attrs={'class':'yt-uix-tile-link'})[0]['href']
+
 def convert(input,outputName):
     clip = mp.VideoFileClip(input)
     clip.audio.write_audiofile(outputName)
-
-"""
-
-songLib = formatMusic("songLib.tsv")
-userInput = [5,3,4,7,8,7,8] #made up user input
-diffLib = findDiff(songLib,userInput)
-relevantSongList = determineRelevantSongs(diffLib,5)
-playableSongs = determineQue(songLib,relevantSongList)
-print(playableSongs)
-
 """
 x = random.randint(0, len(playableSongs) - 1)
 print(x)
 
-while True:
+for x in range(5):
     try:
         getSongs(getSongLink(playableSongs[x][0] + " " + playableSongs[x][2]),"song") #playablesongs is what we que into our music player
         convert("song.mp4",playableSongs[x][0] + ".mp3")
+        downLoadMP3 = True
         break
     except urllib.error.HTTPError as error:
         print(error)
+        downLoadMP3 = False
+
+if downLoadMP3 == True:
+    mixer.init()
+    mixer.music.load(playableSongs[x][0] + ".mp3")
+    mixer.music.play()
 """
