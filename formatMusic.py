@@ -1,3 +1,4 @@
+"""
 from pytube import YouTube
 import os
 import moviepy.editor as mp
@@ -7,7 +8,7 @@ from bs4 import BeautifulSoup
 import random
 import pyaudio
 from pygame import mixer
-
+"""
 def formatMusic(fileName):
     songLib = open(fileName,"r")
     songLib_data = []
@@ -69,22 +70,3 @@ def getSongLink(textToSearch):
 def convert(input,outputName):
     clip = mp.VideoFileClip(input)
     clip.audio.write_audiofile(outputName)
-"""
-x = random.randint(0, len(playableSongs) - 1)
-print(x)
-
-for x in range(5):
-    try:
-        getSongs(getSongLink(playableSongs[x][0] + " " + playableSongs[x][2]),"song") #playablesongs is what we que into our music player
-        convert("song.mp4",playableSongs[x][0] + ".mp3")
-        downLoadMP3 = True
-        break
-    except urllib.error.HTTPError as error:
-        print(error)
-        downLoadMP3 = False
-
-if downLoadMP3 == True:
-    mixer.init()
-    mixer.music.load(playableSongs[x][0] + ".mp3")
-    mixer.music.play()
-"""

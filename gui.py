@@ -1,6 +1,10 @@
 #musically.py- Kaylee N
+<<<<<<< HEAD
 from RNgraphics import *
 from formatMusic import *
+=======
+from graphics import *
+>>>>>>> ba38973291c49d2c612d93337b1d7cbd54373d21
 
 pg1 = False
 pg2 = False
@@ -33,6 +37,7 @@ def nextButton(rX, rY, text, txSize, rCol, txCol, style, win):
     nextTex.setSize(txSize)
     nextTex.setStyle(style)
     nextTex.setTextColor(txCol)
+<<<<<<< HEAD
     nextTex.draw(win)
 
 def questions(tX, tY, text, size, style, color, win):
@@ -63,6 +68,9 @@ askMel = "5.How well does the melody flow? Rate 1-10, 10 meaning it goes along w
 askLyr = "6.How good are the lyrics? Rate 1-10, 10 meaning those lyrics hit you on a whole other level."
 askVoc = "7.Rate the vocals in this song from 1-10, 10 meaning the vocals were beautiful."
 askIns = "8.What's the quality of the instrumental skill? Rate 1-10."
+=======
+    nextTex.draw(win)
+>>>>>>> ba38973291c49d2c612d93337b1d7cbd54373d21
 
 musicWin = GraphWin("Musically", 700, 700)
 musicWin.setCoords(0,0,700,700)
@@ -238,5 +246,25 @@ while len(playableSongs) == 0:
     count += 1
 for x in playableSongs:
     print(x[:1])
+
+"""
+x = random.randint(0, len(playableSongs) - 1)
+print(x)
+
+for x in range(5):
+    try:
+        getSongs(getSongLink(playableSongs[x][0] + " " + playableSongs[x][2]),"song") #playablesongs is what we que into our music player
+        convert("song.mp4",playableSongs[x][0] + ".mp3")
+        downLoadMP3 = True
+        break
+    except urllib.error.HTTPError as error:
+        print(error)
+        downLoadMP3 = False
+
+if downLoadMP3 == True:
+    mixer.init()
+    mixer.music.load(playableSongs[x][0] + ".mp3")
+    mixer.music.play()
+"""
 
 #qOneWin.close()
